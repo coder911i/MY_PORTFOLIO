@@ -39,8 +39,9 @@ export function Resume() {
                     {/* Right with CTA */}
                     <div className="flex flex-col gap-4 items-center md:items-end">
                         <a
-                            href="/resume.pdf"
-                            download="Tanishq_Sharma_Resume.pdf"
+                            href="https://drive.google.com/file/d/1oOBhLiG4k74YMJ_pcvl_ONfeV5YN8oce/view?usp=drive_link"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-3 px-10 py-5 bg-[#ff0055] hover:bg-[#cc0044] text-white rounded-full font-bold text-base tracking-wide transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,0,85,0.4)] hover:shadow-[0_0_60px_rgba(255,0,85,0.6)]"
                         >
                             <Download className="w-5 h-5" />

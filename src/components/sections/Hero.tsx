@@ -120,8 +120,9 @@ export function Hero() {
                         View My Work
                     </button>
                     <a
-                        href="/resume.pdf"
-                        download
+                        href="https://drive.google.com/file/d/1oOBhLiG4k74YMJ_pcvl_ONfeV5YN8oce/view?usp=drive_link"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/50 text-white rounded-full font-semibold text-sm transition-all"
                     >
                         Download Resume
