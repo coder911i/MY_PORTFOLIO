@@ -1,116 +1,141 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "../ui/SectionHeading";
-import { Card } from "../ui/Card";
+
+const categories = [
+    {
+        title: "Programming Languages",
+        color: "#6b21a8",
+        skills: [
+            { name: "Java", level: 88 },
+            { name: "Python", level: 82 },
+            { name: "C++", level: 70 },
+        ],
+    },
+    {
+        title: "Backend Development",
+        color: "#2563eb",
+        skills: [
+            { name: "Node.js", level: 90 },
+            { name: "Express.js", level: 88 },
+            { name: "Spring Boot", level: 78 },
+            { name: "REST APIs", level: 92 },
+        ],
+    },
+    {
+        title: "Databases",
+        color: "#059669",
+        skills: [
+            { name: "MySQL", level: 85 },
+            { name: "PostgreSQL", level: 80 },
+            { name: "MongoDB", level: 82 },
+        ],
+    },
+    {
+        title: "AI Applications",
+        color: "#ec4899",
+        skills: [
+            { name: "AI-powered Apps", level: 85 },
+            { name: "Prompt Engineering", level: 80 },
+            { name: "LLM Integration", level: 78 },
+            { name: "AI Automation", level: 75 },
+        ],
+    },
+    {
+        title: "Automation",
+        color: "#7c3aed",
+        skills: [
+            { name: "n8n", level: 82 },
+            { name: "Zapier", level: 78 },
+        ],
+    },
+    {
+        title: "Realtime Systems",
+        color: "#d97706",
+        skills: [
+            { name: "WebSockets", level: 85 },
+            { name: "Socket.io", level: 83 },
+            { name: "WebRTC", level: 70 },
+        ],
+    },
+    {
+        title: "Developer Tools",
+        color: "#64748b",
+        skills: [
+            { name: "Git", level: 90 },
+            { name: "Postman", level: 88 },
+            { name: "Apache JMeter", level: 75 },
+        ],
+    },
+];
+
+function SkillBar({ name, level, color, delay }: { name: string; level: number; color: string; delay: number }) {
+    return (
+        <div className="mb-4">
+            <div className="flex justify-between mb-1.5">
+                <span className="text-sm text-gray-300 font-medium">{name}</span>
+                <span className="text-xs text-gray-500">{level}%</span>
+            </div>
+            <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay, ease: "easeOut" }}
+                    className="h-full rounded-full"
+                    style={{ background: `linear-gradient(90deg, ${color}88, ${color})`, boxShadow: `0 0 8px ${color}66` }}
+                />
+            </div>
+        </div>
+    );
+}
 
 export function Skills() {
     return (
-        <section id="skills" className="pt-24 relative z-10 w-full px-4 md:px-8">
+        <section id="skills" className="pt-32 relative z-10 px-4 md:px-8 max-w-7xl mx-auto w-full">
             <SectionHeading
-                title="Engineering Capabilities"
-                subtitle="Core competencies mapped across the modern stack."
-                className="mb-16 text-center"
+                title="Skills & Technologies"
+                subtitle="Every tool in my arsenal — categorized and battle-tested in real projects."
+                className="text-center mx-auto mb-16"
             />
 
-            {/* Asymmetrical Bento Grid matching "EchoGrowth" and "Salesrocket" inspiration */}
-            <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 auto-rows-[minmax(0,1fr)]">
-
-                {/* Large Primary AI Block */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="col-span-1 md:col-span-4 lg:col-span-4 row-span-2 h-full"
-                >
-                    <Card className="h-full border border-white/5 flex flex-col justify-between group">
-                        <div>
-                            <div className="w-12 h-12 rounded-xl bg-[#ff0055]/10 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,0,85,0.1)] group-hover:shadow-[0_0_30px_rgba(255,0,85,0.2)] transition-shadow">
-                                <span className="text-[#ff0055] font-bold text-xl">AI</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {categories.map((cat, ci) => (
+                    <motion.div
+                        key={ci}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.6, delay: ci * 0.1 }}
+                        whileHover={{ y: -4 }}
+                        className="bento-card p-6 border border-white/5 group"
+                    >
+                        <div className="glow-effect" />
+                        <div className="relative z-10">
+                            {/* Category header */}
+                            <div className="flex items-center gap-3 mb-6">
+                                <div
+                                    className="w-3 h-3 rounded-full"
+                                    style={{ background: cat.color, boxShadow: `0 0 12px ${cat.color}` }}
+                                />
+                                <h3 className="text-sm font-bold uppercase tracking-widest"
+                                    style={{ color: cat.color }}>
+                                    {cat.title}
+                                </h3>
                             </div>
-                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">AI Applications & Solutions</h3>
-                            <p className="text-gray-400 font-light max-w-md mb-8">
-                                End-to-end intelligent architecture spanning workflow automation to complex language model pipelines.
-                            </p>
-                        </div>
 
-                        <div className="flex flex-wrap gap-3 mt-auto">
-                            {["Prompt Engineering", "Workflow Automation", "LLM Integration", "Intelligent Processing"].map((skill) => (
-                                <span key={skill} className="px-4 py-2 text-sm rounded-lg bg-black/40 border border-white/10 text-gray-300 group-hover:border-[#ff0055]/30 transition-colors">
-                                    {skill}
-                                </span>
+                            {/* Skill bars */}
+                            {cat.skills.map((skill, si) => (
+                                <SkillBar
+                                    key={si}
+                                    name={skill.name}
+                                    level={skill.level}
+                                    color={cat.color}
+                                    delay={ci * 0.08 + si * 0.1}
+                                />
                             ))}
                         </div>
-                    </Card>
-                </motion.div>
-
-                {/* Vertical Stack Block */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ delay: 0.1 }}
-                    className="col-span-1 md:col-span-4 lg:col-span-2 row-span-2 h-full"
-                >
-                    <Card className="h-full border border-white/5 flex flex-col group p-8 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] bg-blend-soft-light" style={{ backgroundImage: "linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.8)), url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')", backgroundSize: "cover" }}>
-                        <h3 className="text-xl font-bold text-white mb-6 tracking-wide">System Architecture</h3>
-                        <div className="space-y-4 flex-1">
-                            {[
-                                { name: "Microservices", val: "95%" },
-                                { name: "Distributed Systems", val: "88%" },
-                                { name: "Async Processing", val: "92%" }
-                            ].map((skill, i) => (
-                                <div key={i} className="space-y-2">
-                                    <div className="flex justify-between text-sm text-gray-400"><span className="text-white">{skill.name}</span> {skill.val}</div>
-                                    <div className="h-1.5 w-full bg-black/50 rounded-full overflow-hidden border border-white/5">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            whileInView={{ width: skill.val }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1.5, delay: 0.2 + (i * 0.1) }}
-                                            className="h-full bg-gradient-to-r from-[#6b21a8] to-[#ff0055] shadow-[0_0_10px_#ff0055]"
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </Card>
-                </motion.div>
-
-                {/* Small Block 1 */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-                    className="col-span-1 md:col-span-2 lg:col-span-2"
-                >
-                    <Card className="h-full border border-white/5 flex flex-col justify-center items-center text-center group min-h-[200px]">
-                        <h3 className="text-lg text-gray-400 font-medium mb-4">Programming</h3>
-                        <p className="text-2xl font-bold text-white group-hover:text-neon transition-all">Java · Python · C++</p>
-                    </Card>
-                </motion.div>
-
-                {/* Small Block 2 */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-                    className="col-span-1 md:col-span-2 lg:col-span-2"
-                >
-                    <Card className="h-full border border-white/5 flex flex-col justify-center items-center text-center group min-h-[200px]">
-                        <h3 className="text-lg text-gray-400 font-medium mb-4">Databases</h3>
-                        <p className="text-2xl font-bold text-white group-hover:text-[#6b21a8] drop-shadow-[0_0_10px_rgba(107,33,168,0.5)] transition-all">MySQL · Postgres · Mongo</p>
-                    </Card>
-                </motion.div>
-
-                {/* Wide Horizontal Block */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
-                    className="col-span-1 md:col-span-4 lg:col-span-2"
-                >
-                    <Card className="h-full border border-white/5 flex flex-col justify-center group min-h-[200px]">
-                        <h3 className="text-lg text-gray-400 font-medium mb-3">Backend Runtime</h3>
-                        <div className="flex gap-4">
-                            <div className="w-1/2 p-4 bg-black/40 rounded-xl border border-white/5 flex items-center justify-center text-white font-bold group-hover:border-[#ff0055]/30">Node.js</div>
-                            <div className="w-1/2 p-4 bg-black/40 rounded-xl border border-white/5 flex items-center justify-center text-white font-bold group-hover:border-[#ff0055]/30">Spring Boot</div>
-                        </div>
-                    </Card>
-                </motion.div>
-
+                    </motion.div>
+                ))}
             </div>
         </section>
     );
