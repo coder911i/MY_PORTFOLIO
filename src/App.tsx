@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   return (
-    <ReactLenis root options={{ lerp: 0.05, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) }}>
       <div className="min-h-screen font-sans selection:bg-[#ff0055]/30 selection:text-white bg-black">
 
         {/* Scroll Progress Bar */}
