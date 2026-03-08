@@ -8,6 +8,7 @@ import { Contact } from "./components/sections/Contact";
 import { AiProducts } from "./components/sections/AiProducts";
 import { Architecture } from "./components/sections/Architecture";
 import { TechStack } from "./components/sections/TechStack";
+import { GlowArea } from "./components/ui/GlowArea";
 
 import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -61,17 +62,19 @@ function App() {
 
         <Navbar />
 
-        <main className="relative z-10 flex flex-col">
+        <GlowArea className="relative z-10 flex flex-col w-full">
           <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <AiProducts />
-          <Architecture />
-          <TechStack />
-          <Experience />
-          <Contact />
-        </main>
+          <div className="w-full max-w-[1400px] mx-auto space-y-32 pb-32">
+            <About />
+            <Skills />
+            <Projects />
+            <AiProducts />
+            <Architecture />
+            <TechStack />
+            <Experience />
+            <Contact />
+          </div>
+        </GlowArea>
 
         <footer className="py-8 text-center text-sm text-muted border-t border-white/5 relative z-10 bg-black/20 backdrop-blur-md">
           <p>© {new Date().getFullYear()} Tanishq Sharma. Designed & Engineered with Precision.</p>

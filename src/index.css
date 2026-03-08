@@ -3,16 +3,17 @@
 @theme {
   --font-inter: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  --color-background: #02040a;
-  --color-foreground: #f4f4f5;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
 
-  --color-primary: #38bdf8;
-  --color-primary-dark: #0284c7;
-  --color-accent: #818cf8;
-  --color-secondary: #0f172a;
-  --color-muted: #94a3b8;
+  --color-primary: #ff0055;
+  /* Magenta/Neon Pink for intense glow */
+  --color-primary-dark: #b3003b;
+  --color-accent: #6b21a8;
+  /* Deep Purple */
+  --color-secondary: #0a0a0a;
+  --color-muted: #888888;
   --color-border: rgba(255, 255, 255, 0.08);
-  --color-card: rgba(15, 23, 42, 0.25);
 }
 
 @layer base {
@@ -22,16 +23,11 @@
     font-family: var(--font-inter);
   }
 
-  html {
-    /* Lenis handles smooth scrolling, so we disable native here to avoid conflicts occasionally. But usually Lenis prefers native disabled implicitly */
-  }
-
   body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: radial-gradient(circle at top right, #0d1222 0%, #02040a 40%);
-    background-attachment: fixed;
+    background: #000000;
   }
 
   /* Custom Scrollbar */
@@ -40,37 +36,72 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #000000;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
   }
 }
 
 @layer utilities {
-  .glass {
-    background: rgba(15, 20, 30, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
 
-  .glass-card {
-    background: linear-gradient(180deg, rgba(30, 40, 60, 0.3) 0%, rgba(10, 15, 25, 0.4) 100%);
+  /* Bento Card Hover Context Variables */
+  .bento-card {
+    background: rgba(10, 10, 10, 0.5);
+    /* Deep dark internal */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 40px -2px rgba(0, 0, 0, 0.4);
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  .text-glow {
-    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+  /* Internal subtle highlight boundary */
+  .bento-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.02) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Mouse tracking radial glow inside cards */
+  .glow-effect {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.05),
+        transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .bento-card:hover .glow-effect {
+    opacity: 1;
+  }
+
+  /* Text and Icon intensive glows */
+  .text-neon {
+    text-shadow: 0 0 20px rgba(255, 0, 85, 0.6), 0 0 40px rgba(255, 0, 85, 0.2);
+  }
+
+  .border-neon {
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.3), inset 0 0 15px rgba(255, 0, 85, 0.1);
   }
 
   /* Lenis integration classes */
