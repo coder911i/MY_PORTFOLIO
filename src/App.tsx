@@ -11,7 +11,7 @@ import { TechStack } from "./components/sections/TechStack";
 
 import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ReactLenis } from '@studio-freight/react-lenis';
+import { ReactLenis } from 'lenis/react';
 
 function App() {
   const { scrollYProgress } = useScroll();
